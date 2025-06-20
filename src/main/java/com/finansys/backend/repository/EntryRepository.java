@@ -41,11 +41,11 @@ public interface EntryRepository extends JpaRepository<Entry, Long>{
 	
 	List<Entry> findByCategoryIdOrderByDateDesc(Long categoryId);
 	
-	@Query("SELECT SUM(e.amount) FROM Entry e WHERE e.type = :type AND e.paid = true")
-	Optional<BigDecimal> sumAmountByTypeAndPaid(@Param("type") String type);
+	@Query("SELECT SUM(e.amount) FROM Entry e WHERE e.type = :type AND e.paid = :paid")
+	Optional<BigDecimal> sumAmountByTypeAndPaid(@Param("type") String type, @Param("paid") boolean paid);
 	
-	@Query("SELECT SUM(e.amount) FROM Entry e WHERE e.categoryId = :categoryId AND e.paid = true")
-	Optional<BigDecimal> sumAmountByCategoryAndPaid(@Param("categoryId") Long categoryId);
+	@Query("SELECT SUM(e.amount) FROM Entry e WHERE e.categoryId = :categoryId AND e.paid = :paid")
+	Optional<BigDecimal> sumAmountByCategoryAndPaid(@Param("categoryId") Long categoryId, @Param("paid") boolean paid);
 	
 	@Query("""
 			 SELECT SUM(e.amount) FROM Entry e
