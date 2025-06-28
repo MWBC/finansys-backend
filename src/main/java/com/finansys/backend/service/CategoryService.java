@@ -36,7 +36,9 @@ public class CategoryService {
 				.description(categoryRequestDTO.description())
 				.build();
 		
-		return this.convertToResponse(category);
+		Category savedCategory = categoryRepository.save(category);
+		
+		return this.convertToResponse(savedCategory);
 	}
 	
 	@Transactional(readOnly = true)
@@ -125,6 +127,6 @@ public class CategoryService {
 				category.getDescription(), 
 				category.getCreatedAt(), 
 				category.getUpdatedAt(), 
-				category.getEntries().size());
+				category.getEntries() != null ? category.getEntries().size() : 0);
 	}
 }
