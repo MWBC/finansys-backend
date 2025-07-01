@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public record EntryResponseDTO(Long id, String name, String description, String type, BigDecimal amount, LocalDate date, Boolean paid, Long categoryId, String categoryName, LocalDateTime createdAt, LocalDateTime updateddAt) {
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+public record EntryResponseDTO(Long id, String name, String description, String type, BigDecimal amount, @JsonFormat(pattern = "dd/MM/yyyy") LocalDate date, Boolean paid, Long categoryId, String categoryName, LocalDateTime createdAt, LocalDateTime updateddAt) {
 
 }

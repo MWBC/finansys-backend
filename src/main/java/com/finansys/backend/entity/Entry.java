@@ -57,7 +57,7 @@ public class Entry {
 	private String description;
 	
 	@NotBlank(message = "Tipo do Lançamento é obrigatório")
-	@Pattern(regexp = "^(Receita|Despesa)$",
+	@Pattern(regexp = "^(revenue|expense)$",
 	message = "Tipo deve ser Receita ou Despesa")
 	@Column(name = "type", nullable = false, length = 20)
 	private String type;
@@ -111,11 +111,11 @@ public class Entry {
 	
 	public boolean isReceita() {
 		
-		return "Receita".equals(this.type);
+		return "revenue".equals(this.type);
 	}
 	
 	public boolean isDespesa() {
 	
-		return "Despesa".equals(this.type);
+		return "expense".equals(this.type);
 	}
 }
