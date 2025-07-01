@@ -115,4 +115,24 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>development</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.flywaydb</groupId>
+						<artifactId>flyway-maven-plugin</artifactId>
+						<version>11.7.2</version>
+						<configuration>
+							<configFiles>
+								<configFile>src/main/resources/flyway/dev/flyway.properties</configFile>
+							</configFiles>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 </project>
