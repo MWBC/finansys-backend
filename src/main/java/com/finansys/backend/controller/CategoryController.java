@@ -45,7 +45,7 @@ public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
 	
-	@PostMapping("store")
+	@PostMapping()
     @Operation(summary = "Criar categoria", description = "Cria uma nova categoria")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Categoria criada com sucesso"),
