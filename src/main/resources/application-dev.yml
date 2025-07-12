@@ -16,3 +16,6 @@ logging:
   level:
     root: INFO
     com.finansys.backend: DEBUG
+
+jwt:
+  secret: xLGe6hb54PcRDv+DuJrdGDV2N0eCY4JEJYiMGVfeyVg=

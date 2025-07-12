@@ -95,6 +95,13 @@ public class User implements UserDetails {
     @Column(name = "last_login")
     private LocalDateTime lastLogin;
     
+    public User(String name, String email, String password) {
+    	
+    	this.name = name;
+    	this.email = email;
+    	this.password = password;
+    }
+    
     @PrePersist
     protected void onCreate() {
     	
@@ -165,6 +172,11 @@ public class User implements UserDetails {
         public String getAuthority() {
             return authority;
         }
+    }
+    
+    public void updateLastLogin() {
+    	
+        this.lastLogin = LocalDateTime.now();
     }
 
 }
