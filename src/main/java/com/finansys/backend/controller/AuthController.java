@@ -59,7 +59,7 @@ public class AuthController {
 
             	return ResponseEntity.ok()
             	    .header(HttpHeaders.SET_COOKIE, cookie.toString())
-            	    .body("Login realizado com sucesso");
+            	    .body(new MessageResponseDTO("Login realizado com sucesso", true, LocalDateTime.now()));
 
 //            return ResponseEntity.ok(jwtResponse);
         } catch (Exception e) {

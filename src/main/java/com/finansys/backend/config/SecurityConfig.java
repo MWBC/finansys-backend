@@ -64,7 +64,7 @@ public class SecurityConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(authz -> authz
                 // Endpoints públicos
-                .requestMatchers("/auth/login").permitAll()
+                .requestMatchers("api/auth/login").permitAll()
                 .requestMatchers("/h2-console/**").permitAll()
                 .requestMatchers("/actuator/**").permitAll()
                 .requestMatchers("/swagger-ui/**").permitAll()

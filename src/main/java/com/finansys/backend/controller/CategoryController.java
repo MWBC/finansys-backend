@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +27,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
@@ -35,9 +35,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 @Tag(name = "Categorias", description = "Endpoints para gerenciamento de Categorias")
 
 //annotation springdoc-openai para indicar que o endpoint exige autenticação
-//@SecurityRequirement(name = "bearerAuth")
-
-@CrossOrigin(origins = "*", maxAge = 3600)
+@SecurityRequirement(name = "bearerAuth")
 public class CategoryController {
 
 	@Autowired
