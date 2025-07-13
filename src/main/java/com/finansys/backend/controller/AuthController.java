@@ -1,11 +1,13 @@
 package com.finansys.backend.controller;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +30,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 @RestController
 @RequestMapping("auth")
 @Tag(name = "Autenticação", description = "Endpoints para autenticação e registro de usuário")
-@CrossOrigin(origins = "*", maxAge = 3600)
 public class AuthController {
 
 	@Autowired
@@ -47,7 +48,20 @@ public class AuthController {
         	
             JwtResponseDTO jwtResponse = authService.authenticateUser(loginRequest);
             
-            return ResponseEntity.ok(jwtResponse);
+            
+            ResponseCookie cookie = ResponseCookie.from("token", jwtResponse.token())
+            	    .httpOnly(true)
+            	    .secure(true)
+            	    .path("/")
+            	    .maxAge(Duration.ofHours(1))
+            	    .sameSite("Strict")
+            	    .build();
+
+            	return ResponseEntity.ok()
+            	    .header(HttpHeaders.SET_COOKIE, cookie.toString())
+            	    .body("Login realizado com sucesso");
+
+//            return ResponseEntity.ok(jwtResponse);
         } catch (Exception e) {
         	
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new MessageResponseDTO("Credenciais inválidas: " + e.getMessage(), false, LocalDateTime.now()));

@@ -19,3 +19,21 @@ logging:
 
 jwt:
   secret: xLGe6hb54PcRDv+DuJrdGDV2N0eCY4JEJYiMGVfeyVg=
+
+cors:
+  allowed-origins:
+    - "http://localhost:4200"
+    - "http://localhost:3000"
+    - "http://127.0.0.1:4200"
+    - "http://127.0.0.1:3000"
+    - "http://localhost:8081"
+  allowed-methods:
+    - "GET"
+    - "POST"
+    - "PUT"
+    - "DELETE"
+    - "PATCH"
+    - "OPTIONS"
+  allowed-headers:
+    - "*"
+  allow-credentials: true

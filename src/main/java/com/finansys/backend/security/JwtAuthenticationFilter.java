@@ -19,6 +19,7 @@ import com.finansys.backend.service.JwtService;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -38,7 +39,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         
         try {
         	
-            String jwt = getJwtFromRequest(request);
+            String jwt = getJwtFromRequestCookie(request);
             
             if (StringUtils.hasText(jwt) && jwtService.isTokenValid(jwt)) {
             	
@@ -82,6 +83,26 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return bearerToken.substring(7);
         }
         return null;
+    }
+    
+    private String getJwtFromRequestCookie(HttpServletRequest request) {
+    	
+		String bearerToken = null;
+		
+		for(Cookie cookie: request.getCookies()) {
+			
+			if(cookie.getName().equals("token")) {
+				
+				bearerToken = cookie.getValue();
+			}
+		}
+
+	    if (StringUtils.hasText(bearerToken)) {
+	    	
+	        return bearerToken;
+	    }
+
+    		return null;
     }
     
     @Override
