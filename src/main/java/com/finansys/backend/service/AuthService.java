@@ -61,7 +61,7 @@ public class AuthService {
             jwt,
             "Bearer", 
             user.getId(),
-            user.getUsername(),
+            user.getName(),
             user.getEmail(),
             user.getRole().name(),
             expiresAt

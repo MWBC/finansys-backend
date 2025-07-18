@@ -59,7 +59,7 @@ public class AuthController {
 
             	return ResponseEntity.ok()
             	    .header(HttpHeaders.SET_COOKIE, cookie.toString())
-            	    .body(new MessageResponseDTO("Login realizado com sucesso", true, LocalDateTime.now()));
+            	    .body(jwtResponse);
 
 //            return ResponseEntity.ok(jwtResponse);
         } catch (Exception e) {
@@ -127,4 +127,26 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new MessageResponseDTO("Usuário não autenticado", false, LocalDateTime.now()));
         }
     }
+	
+	@PostMapping("/logout")
+	@Operation(summary = "Realizar logout do usuário atual", 
+    description = "Expira o cookie do token jwt do usuário")
+	@ApiResponses(value = {
+	@ApiResponse(responseCode = "200", description = "Logout realizado com sucesso"),
+	@ApiResponse(responseCode = "401", description = "Usuário não autenticado")
+})
+	public ResponseEntity<?> logout() {
+		
+        ResponseCookie cookie = ResponseCookie.from("token", null)
+        	    .httpOnly(true)
+        	    .secure(true)
+        	    .path("/")
+        	    .maxAge(Duration.ofHours(0))
+        	    .sameSite("Strict")
+        	    .build();
+
+        	return ResponseEntity.ok()
+        	    .header(HttpHeaders.SET_COOKIE, cookie.toString())
+        	    .body(new MessageResponseDTO("Logout realizado com sucesso.", true, LocalDateTime.now()));
+	}
 }
