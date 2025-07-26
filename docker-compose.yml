@@ -3,11 +3,19 @@ services:
    app:
       build:
          context: .
+         args:
+            - DB_USER=${DB_USER}
+            - DB_PASSWORD=${DB_PASSWORD}
+            - DB_HOST=${DB_HOST}
          dockerfile: Dockerfile
       networks:
          - backend
       ports:
          - "8080:8080" 
+      environment:
+         - DB_USER=${DB_USER}
+         - DB_PASSWORD=${DB_PASSWORD}
+         - DB_HOST=${DB_HOST}
 
 networks:
    backend:

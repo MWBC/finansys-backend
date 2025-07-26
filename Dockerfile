@@ -5,6 +5,10 @@ RUN apt-get update
 
 RUN apt-get install openjdk-17-jdk -y 
 
+#Argumento para usar no build
+ARG DB_USER
+ARG DB_PASSWORD
+ARG DB_HOST
 #Copia o projeto para dentro da imagem do ubuntu
 COPY . . 
 
