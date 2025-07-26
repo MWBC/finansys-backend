@@ -27,6 +27,7 @@ cors:
     - "http://127.0.0.1:4200"
     - "http://127.0.0.1:3000"
     - "http://localhost:8081"
+    - "https://finansys-angular.vercel.app" 
   allowed-methods:
     - "GET"
     - "POST"
