@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://${DB_HOST}:5434/finansys
+    url: jdbc:postgresql://${DB_HOST}/finansys
     driver-class-name: org.postgresql.Driver
     username: ${DB_USER}
     password: ${DB_PASSWORD}
